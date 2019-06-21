@@ -26,6 +26,10 @@ class Game {
 
     return new_game
   }
+
+  static async find(filter) {
+    return await db('games').where(filter).limit(1)
+  }
 }
 
 /**

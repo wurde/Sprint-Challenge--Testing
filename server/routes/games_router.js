@@ -25,6 +25,14 @@ router.route('/')
   .post(GamesController.create)
 
 /**
+ * Routes
+ *   GET /games/:id
+ */
+
+router.route('/:id')
+  .get(GamesController.show)
+
+/**
  * Export router
  */
 

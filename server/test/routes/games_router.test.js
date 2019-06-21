@@ -88,8 +88,15 @@ describe('routes', () => {
       expect(res_missing_genre.body).toMatchObject({ error: { message: 'Missing fields: title' } })
     })
 
-    test.todo('POST /games - uniqueness conflict') // 409 Conflict
-    test.todo('GET /games/:id - success')
+    test('GET /games/:id - success', async () => {
+      const res = await supertest(app).get('/games/1')
+      expect(res.status).toBe(200)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body.length).toBe(1)
+      expect(res.body[0]).toMatchObject({ id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980 })
+    })
+
     test.todo('GET /games/:id - not found')
     test.todo('PUT /games/:id - success')
     test.todo('PUT /games/:id - not found')
