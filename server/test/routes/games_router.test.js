@@ -48,7 +48,15 @@ describe('routes', () => {
       expect(res.body[0]).toMatchObject({id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980})
     })
 
-    test.todo('GET /games - return empty array if no games')
+    test('GET /games - return empty array if no games', async () => {
+      await db('games').del()
+      const res = await supertest(app).get('/games')
+      expect(res.status).toBe(200)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body.length).toBe(0)
+    })
+
     test.todo('POST /games - success')
     test.todo('POST /games - missing request body') // 422 Unprocessable Entity
     test.todo('POST /games - missing request body fields') // 422 Unprocessable Entity
