@@ -5,7 +5,7 @@
  */
 
 const express = require('express')
-const RootController = require('../controllers/RootController')
+const GamesController = require('../controllers/GamesController')
 
 /**
  * Define router
@@ -15,11 +15,11 @@ const router = express.Router()
 
 /**
  * Routes
- *   GET /
+ *   GET /games
  */
 
 router.route('/')
-  .get(RootController.index)
+  .get(GamesController.index)
 
 /**
  * Export router

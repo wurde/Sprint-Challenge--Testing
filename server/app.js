@@ -37,6 +37,7 @@ app.use(express.json())
  */
 
 app.use('/', require('./routes/root_router'))
+app.use('/games', require('./routes/games_router'))
 
 /**
  * Start server
