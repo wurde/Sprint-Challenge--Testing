@@ -39,9 +39,15 @@ class GamesController {
 
   static async create(req, res) {
     try {
-      const game = await Game.create(req.body)
+      const is_title_unique = await Game.title_uniqueness_check(req.body.title)
 
-      res.status(201).json(game)
+      if (is_title_unique) {
+        const game = await Game.create(req.body)
+
+        res.status(201).json(game)
+      } else {
+        res.status(405).json({ error: { message: 'Not Allowed: Game already exists with that title' } })
+      }
     } catch(err) {
       console.error(err)
       res.status(500).json({ error: { message: 'Internal Server Error' } })

@@ -48,6 +48,16 @@ class Game {
   static async destroy(id) {
     return await db('games').where({ id: id }).del()
   }
+
+  static async title_uniqueness_check(title) {
+    const game = await db('games').where({ title: title }).first()
+
+    if (game) {
+      return false
+    } else {
+      return true
+    }
+  }
 }
 
 /**

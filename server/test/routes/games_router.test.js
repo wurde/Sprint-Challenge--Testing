@@ -88,7 +88,13 @@ describe('routes', () => {
       expect(res_missing_genre.body).toMatchObject({ error: { message: 'Missing fields: title' } })
     })
 
-    test.todo('POST /games - not allowed title uniqueness check')
+    test('POST /games - not allowed title uniqueness check', async () => {
+      const res = await supertest(app).post('/games').send({ title: 'Pacman', genre: 'Arcade' })
+      expect(res.status).toBe(405)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body).toMatchObject({ error: { message: 'Not Allowed: Game already exists with that title' } })
+    })
 
     test('GET /games/:id - success', async () => {
       const res = await supertest(app).get('/games/1')
