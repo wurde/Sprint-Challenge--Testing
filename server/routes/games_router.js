@@ -26,13 +26,14 @@ router.route('/')
 
 /**
  * Routes
- *   GET,PUT /games/:id
+ *   GET,PUT,DELETE /games/:id
  */
 
 router.route('/:id')
   .all(GamesController.find_or_404)
   .get(GamesController.show)
   .put(GamesController.update)
+  .delete(GamesController.destroy)
 
 /**
  * Export router

@@ -69,6 +69,17 @@ class GamesController {
       res.status(500).json({ error: { message: 'Internal Server Error' } })
     }
   }
+
+  static async destroy(req, res) {
+    try {
+      await Game.destroy(req.params.id)
+
+      res.status(200).json()
+    } catch(err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Internal Server Error' } })
+    }
+  }
 }
 
 /**

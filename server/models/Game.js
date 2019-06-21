@@ -44,6 +44,10 @@ class Game {
 
     return new_game
   }
+
+  static async destroy(id) {
+    return await db('games').where({ id: id }).del()
+  }
 }
 
 /**

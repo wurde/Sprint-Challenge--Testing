@@ -122,7 +122,12 @@ describe('routes', () => {
       expect(res.body).toMatchObject({ error: { message: 'Game not found' } })
     })
 
-    test.todo('DELETE /games/:id - success')
+    test('DELETE /games/:id - success', async () => {
+      const res = await supertest(app).delete('/games/1')
+      expect(res.status).toBe(200)
+      expect(res.type).toBe('application/json')
+    })
+
     test.todo('DELETE /games/:id - not found')
   })
 })
