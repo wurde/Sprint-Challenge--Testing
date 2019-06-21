@@ -34,7 +34,11 @@ describe('routes', () => {
   })
 
   describe('games_router.js', () => {
-    test.todo('GET /game - not found') // 404 Not Found
+    test('GET /game - not found', async () => {
+      const res = await supertest(app).get('/game')
+      expect(res.status).toBe(404)
+    })
+
     test.todo('GET /games - success')
     test.todo('GET /games - return empty array if no games')
     test.todo('POST /games - success')
