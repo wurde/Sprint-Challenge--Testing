@@ -5,6 +5,7 @@
  */
 
 const express = require('express')
+const require_body = require('../middleware/checks/require_body')
 const GamesController = require('../controllers/GamesController')
 
 /**
@@ -20,6 +21,7 @@ const router = express.Router()
 
 router.route('/')
   .get(GamesController.index)
+  .all(require_body(['title', 'genre']))
   .post(GamesController.create)
 
 /**

@@ -66,7 +66,14 @@ describe('routes', () => {
       expect(res.body[0].releaseYear).toBe(2004)
     })
 
-    test.todo('POST /games - missing request body') // 422 Unprocessable Entity
+    test('POST /games - missing request body', async () => {
+      const res = await supertest(app).post('/games')
+      expect(res.status).toBe(422)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body).toMatchObject({ error: { message: 'Missing request body' } })
+    })
+
     test.todo('POST /games - missing request body fields') // 422 Unprocessable Entity
     test.todo('POST /games - uniqueness conflict') // 409 Conflict
     test.todo('GET /games/:id - success')
