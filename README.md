@@ -47,8 +47,8 @@ Automated tests include: unit tests, integration tests, and end-to-end tests. An
 
 Your finished project must include all of the following requirements:
 
-- [ ] Use `jest` and `supertest` to write the tests.
-- [ ] Write the **tests BEFORE** writing the route handlers.
+- [x] Use `jest` and `supertest` to write the tests.
+- [x] Write the **tests BEFORE** writing the route handlers.
 - [ ] Your API must have both `POST` and `GET` endpoints for `/games`.
 - [ ] Write a **minimum** of three tests per endpoint.
 
