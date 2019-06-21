@@ -62,8 +62,8 @@ describe('routes', () => {
       expect(res.status).toBe(201)
       expect(res.type).toBe('application/json')
       expect(res.body).toBeTruthy()
-      expect(res.body[0].title).toBe('World of Warcraft')
-      expect(res.body[0].releaseYear).toBe(2004)
+      expect(res.body.title).toBe('World of Warcraft')
+      expect(res.body.releaseYear).toBe(2004)
     })
 
     test('POST /games - missing request body', async () => {
@@ -93,11 +93,17 @@ describe('routes', () => {
       expect(res.status).toBe(200)
       expect(res.type).toBe('application/json')
       expect(res.body).toBeTruthy()
-      expect(res.body.length).toBe(1)
-      expect(res.body[0]).toMatchObject({ id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980 })
+      expect(res.body).toMatchObject({ id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980 })
     })
 
-    test.todo('GET /games/:id - not found')
+    test('GET /games/:id - not found', async () => {
+      const res = await supertest(app).get('/games/x9000')
+      expect(res.status).toBe(404)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body).toMatchObject({ error: { message: 'Game not found' } })
+    })
+
     test.todo('PUT /games/:id - success')
     test.todo('PUT /games/:id - not found')
     test.todo('DELETE /games/:id - success')

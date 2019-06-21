@@ -22,13 +22,13 @@ class Game {
       releaseYear: game.releaseYear,
     })
 
-    const new_game = await db('games').where({ id: id })
+    const new_game = await db('games').where({ id: id }).first()
 
     return new_game
   }
 
   static async find(filter) {
-    return await db('games').where(filter).limit(1)
+    return await db('games').where(filter).first()
   }
 }
 

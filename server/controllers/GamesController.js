@@ -11,6 +11,21 @@ const Game = require('../models/Game')
  */
 
 class GamesController {
+  static async find_or_404(req, res, next) {
+    try {
+      const game = await Game.find({ id: req.params.id })
+
+      if (game) {
+        next()
+      } else {
+        res.status(404).json({ error: { message: 'Game not found' } })
+      }
+    } catch(err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Internal Server Error' } })
+    }
+  }
+
   static async index(req, res) {
     try {
       const games = await Game.all()

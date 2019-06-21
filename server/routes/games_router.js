@@ -30,6 +30,7 @@ router.route('/')
  */
 
 router.route('/:id')
+  .all(GamesController.find_or_404)
   .get(GamesController.show)
 
 /**
