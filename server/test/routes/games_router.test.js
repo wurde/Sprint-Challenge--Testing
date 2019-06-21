@@ -74,7 +74,20 @@ describe('routes', () => {
       expect(res.body).toMatchObject({ error: { message: 'Missing request body' } })
     })
 
-    test.todo('POST /games - missing request body fields') // 422 Unprocessable Entity
+    test('POST /games - missing request body fields', async () => {
+      const res_missing_title = await supertest(app).post('/games').send({ title: 'World of Warcraft' })
+      expect(res_missing_title.status).toBe(422)
+      expect(res_missing_title.type).toBe('application/json')
+      expect(res_missing_title.body).toBeTruthy()
+      expect(res_missing_title.body).toMatchObject({ error: { message: 'Missing fields: genre' } })
+
+      const res_missing_genre = await supertest(app).post('/games').send({ genre: 'MMORPG' })
+      expect(res_missing_genre.status).toBe(422)
+      expect(res_missing_genre.type).toBe('application/json')
+      expect(res_missing_genre.body).toBeTruthy()
+      expect(res_missing_genre.body).toMatchObject({ error: { message: 'Missing fields: title' } })
+    })
+
     test.todo('POST /games - uniqueness conflict') // 409 Conflict
     test.todo('GET /games/:id - success')
     test.todo('GET /games/:id - not found')
