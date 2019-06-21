@@ -21,6 +21,17 @@ class GamesController {
       res.status(500).json({ error: { message: 'Internal Server Error' } })
     }
   }
+
+  static async create(req, res) {
+    try {
+      const game = await Game.create(req.body)
+
+      res.status(201).json(game)
+    } catch(err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Internal Server Error' } })
+    }
+  }
 }
 
 /**

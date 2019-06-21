@@ -15,11 +15,12 @@ const router = express.Router()
 
 /**
  * Routes
- *   GET /games
+ *   GET,POST /games
  */
 
 router.route('/')
   .get(GamesController.index)
+  .post(GamesController.create)
 
 /**
  * Export router

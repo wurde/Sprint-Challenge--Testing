@@ -45,7 +45,7 @@ describe('routes', () => {
       expect(res.type).toBe('application/json')
       expect(res.body).toBeTruthy()
       expect(res.body.length).toBe(3)
-      expect(res.body[0]).toMatchObject({id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980})
+      expect(res.body[0]).toMatchObject({ id: 1, title: 'Pacman', genre: 'Arcade', releaseYear: 1980 })
     })
 
     test('GET /games - return empty array if no games', async () => {
@@ -57,7 +57,15 @@ describe('routes', () => {
       expect(res.body.length).toBe(0)
     })
 
-    test.todo('POST /games - success')
+    test('POST /games - success', async () => {
+      const res = await supertest(app).post('/games').send({ title: 'World of Warcraft', genre: 'MMORPG', releaseYear: 2004 })
+      expect(res.status).toBe(201)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body[0].title).toBe('World of Warcraft')
+      expect(res.body[0].releaseYear).toBe(2004)
+    })
+
     test.todo('POST /games - missing request body') // 422 Unprocessable Entity
     test.todo('POST /games - missing request body fields') // 422 Unprocessable Entity
     test.todo('POST /games - uniqueness conflict') // 409 Conflict
