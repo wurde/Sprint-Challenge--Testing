@@ -12,6 +12,10 @@ const app = require('../../app')
  */
 
 describe('routes', () => {
+  test('NODE_ENV=test', () => {
+    expect(process.env.NODE_ENV).toBe('test')
+  })
+
   describe('games_router.js', () => {
     test.todo('GET /game - not found') // 404 Not Found
     test.todo('GET /games - success')

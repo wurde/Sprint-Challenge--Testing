@@ -12,6 +12,10 @@ const app = require('../../app')
  */
 
 describe('routes', () => {
+  test('NODE_ENV=test', () => {
+    expect(process.env.NODE_ENV).toBe('test')
+  })
+
   describe('root_router.js', () => {
     test('GET / - success', async () => {
       const res = await supertest(app).get('/')
