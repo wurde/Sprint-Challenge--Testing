@@ -114,7 +114,14 @@ describe('routes', () => {
       expect(res.body).toMatchObject({ id: 1, title: 'Pacman', genre: 'Classics', releaseYear: 1980 })
     })
 
-    test.todo('PUT /games/:id - not found')
+    test('PUT /games/:id - not found', async () => {
+      const res = await supertest(app).put('/games/x9000').send({ genre: 'Classics' })
+      expect(res.status).toBe(404)
+      expect(res.type).toBe('application/json')
+      expect(res.body).toBeTruthy()
+      expect(res.body).toMatchObject({ error: { message: 'Game not found' } })
+    })
+
     test.todo('DELETE /games/:id - success')
     test.todo('DELETE /games/:id - not found')
   })
