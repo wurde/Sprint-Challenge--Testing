@@ -58,6 +58,17 @@ class GamesController {
       res.status(500).json({ error: { message: 'Internal Server Error' } })
     }
   }
+
+  static async update(req, res) {
+    try {
+      const game = await Game.update(req.params.id, req.body)
+
+      res.status(200).json(game)
+    } catch(err) {
+      console.error(err)
+      res.status(500).json({ error: { message: 'Internal Server Error' } })
+    }
+  }
 }
 
 /**
