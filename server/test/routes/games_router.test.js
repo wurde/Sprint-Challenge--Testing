@@ -6,6 +6,23 @@
 
 const supertest = require('supertest')
 const app = require('../../app')
+const db = require('../../db/client')
+
+/**
+ * Hooks
+ */
+
+beforeAll(async () => {
+  await db.migrate.latest()
+})
+
+beforeEach(async () => {
+  await db.seed.run()
+})
+
+afterAll(async () => {
+  await db.migrate.rollback(null, true)
+})
 
 /**
  * Assertions

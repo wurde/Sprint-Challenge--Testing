@@ -22,5 +22,8 @@ coverage
 # Ignore Mac DS_Store files
 .DS_Store
 
+# Ignore development and test db
+*.sqlite3
+
 # Prevent gitsync conflicts
 .gitsync_lock
